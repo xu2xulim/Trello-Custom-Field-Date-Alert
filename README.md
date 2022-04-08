@@ -1,38 +1,32 @@
-# Trello-Item-Alert
+# Trello-Custom-Field-Date-Alert
 
 Trello offers a notification system based on card due date and notification system documented at https://help.trello.com/article/793-receiving-trello-notifications .
 
-The advanced checklist allows for item due date and assigning of card member on the item. However, there is no notification when the item is due or a reminder based on the due date.
+While you can create custom field dates, there is no notification built around these dates.
 
 This solution addresses the above by :
 
-- create a alert record when there is a due date on an item.
-- a cron job will process all items with an "incomplete" state and due date matching a pre-determined criterion.
-- notify the user if a member is assigned to the card using **"@username some meaningful text" or "@card some meaningful text"** if no member is assigned to the item
-- set a expiry on the alert record delete the record.
-  - when notification has sent.
-  - when item is marked "complete".
-- when a new due date is set after due date had expires or when item state is changed after notification, the item will be eligible for notification again.
+- create a alert record when there is a date set on a custom field date.
+  - when a new date the alert record will be update with the new date
+- a cron job will process all alerts with a "tracking" status and date that matches a pre-determined criterion.
+- create a notification by create a comment using "@card some meaningful text"**.
+- set a expiry on the alert record so that it is automatically removed from the alert file.
 
 ## Endpoints
 
-### /itemUpdate
+### /cfdate_alert
 
-This serves as the webhook endpoint. The idModel is the board_id.
-
-### /create
-
-This is creates the alert record.
+This serves as the webhook endpoint to process updates to custom fields ,and in particular, those of type = 'date'. It creates an alert record.
 
 ### /setup
 
-This creates a webhook in Trello based on the idModel. This this case, it will be the board_id.
+This creates a webhook in Trello based on the idModel using the board_id. This means that the system can be used concurrent for different boards.
 
 ### /stop
 
-This deletes the webhook in Trello by a board.
+This deletes the webhook in Trello by a board and also remove all existing already records for the board.
 
-The endpoint documentation is available at https://5o5jrk.deta.dev/redoc .
+The endpoint documentation is available at https://zlaxc3.deta.dev/redoc .
 
 ## Pre-requisites
 
@@ -48,4 +42,8 @@ The solution components include :
   - a cron to process and create the alerts.
 - A Deta Base for the alert records.
 - Trello webhook using the board id as the idModel.
-- There is 10s timeout for all micro and cron for a Deta deployment. Request can be made to increase this.
+
+## Roadmap
+Here's a list of enhancements on the roadmap.
+- An exclusion list for custom field dates.
+- A different alert days for different boards.
