@@ -47,3 +47,4 @@ The solution components include :
 Here's a list of enhancements on the roadmap.
 - An exclusion list for custom field dates.
 - A different alert days for different boards.
+- Automatic expiry when date is set before today
