@@ -12,6 +12,8 @@ This solution addresses the above by :
 - create a notification by create a comment using "@card some meaningful text"**.
 - set a expiry on the alert record so that it is automatically removed from the alert file.
 
+**Updated (Apr 13) :** Support for Start Date is now available. The trigger criterion would be the same as custom fields.
+
 ## Endpoints
 
 ### /cfdate_alert
